@@ -46,3 +46,41 @@ This project implements a **Medical Alert System** designed to monitor continuou
 - **Docker**: Task containerization for seamless execution.
 
 ## Project Structure
+├── monitor_cgm.py       # Simulates CGM value generation.
+├── main.py              # Sends SMS alerts using Twilio.
+├── value.py             # Simulates user response to alerts.
+├── README.md            # Project documentation.
+├── Dockerfile           # Docker configuration for running tasks.
+└── kestra.yml           # Kestra workflow definition.
+
+## Installation and Setup
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Saahiti402/MedicalAlert.git
+   cd MedicalAlert
+2. **Set Up Dependencies**:
+Ensure Docker and Kestra are installed.
+3.**Configure Environment Variables**:
+
+- Create a `.env` file with your Twilio credentials:
+  TWILIO_ACCOUNT_SID=your_account_sid
+  TWILIO_AUTH_TOKEN=your_auth_token
+  TWILIO_PHONE_NUMBER=your_twilio_number
+  USER_PHONE_NUMBER=user_phone_number
+4.**Run the Workflow**:
+Deploy the Kestra workflow:
+kestra-cli start --namespace medical.alert --id alert-system
+
+## Usage
+
+1. The system monitors CGM values in real-time.
+2. If a critical value is detected, the user receives an SMS alert.
+3. The user must respond within 5 minutes. If they fail, the system escalates the alert to emergency contacts.
+
+
+## Future Enhancements
+
+- Integration with real CGM devices.
+- Dashboard for visualizing CGM data trends.
+- Machine learning models to predict abnormal CGM patterns.
