@@ -92,5 +92,5 @@ kestra-cli start --namespace medical.alert --id alert-system
 
 ## Screenshots and videos
 
-
+![Medical Alert System alert](/picture.jpg?height=300&width=500)
 
