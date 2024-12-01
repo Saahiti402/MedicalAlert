@@ -90,12 +90,8 @@ kestra-cli start --namespace medical.alert --id alert-system
 - Dashboard for visualizing CGM data trends.
 - Machine learning models to predict abnormal CGM patterns.
 
-## Screenshots and videos
+## Screenshot
 <img src="/picture.jpg" width="300" height="500">
-
-<video width="640" height="360" controls>
-  <source src="/video.mp4" type="video/mp4">
-</video>
 
 
 
