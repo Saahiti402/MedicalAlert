@@ -47,10 +47,15 @@ This project implements a **Medical Alert System** designed to monitor continuou
 
 ## Project Structure
 ├── monitor_cgm.py       # Simulates CGM value generation.
+
 ├── main.py              # Sends SMS alerts using Twilio.
+
 ├── value.py             # Simulates user response to alerts.
+
 ├── README.md            # Project documentation.
+
 ├── Dockerfile           # Docker configuration for running tasks.
+
 └── kestra.yml           # Kestra workflow definition.
 
 ## Installation and Setup
