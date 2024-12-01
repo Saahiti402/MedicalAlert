@@ -91,6 +91,6 @@ kestra-cli start --namespace medical.alert --id alert-system
 - Machine learning models to predict abnormal CGM patterns.
 
 ## Screenshots and videos
-<img src="/picture.jpg" width="50%" height="80">
+<img src="/picture.jpg" width="50%">
 ![Medical Alert System alert](/picture.jpg)
 
