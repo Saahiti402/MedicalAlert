@@ -1,0 +1,57 @@
+id: alert-system
+namespace: medical.alert
+tasks:
+  - id: cgm-values
+    type: io.kestra.plugin.scripts.python.Commands
+    commands:
+      - pip install requests
+      - python monitor_cgm.py
+    namespaceFiles:
+      enabled: true
+    taskRunner:
+      type: io.kestra.plugin.scripts.runner.docker.Docker
+  - id: alert-user
+    type: io.kestra.plugin.core.flow.If
+    condition: outputs.cgm-values.exitCode == 0
+    then:
+      - id: send-alert-message
+        type: io.kestra.plugin.scripts.python.Commands
+        commands:
+          - pip install twilio
+          - python main.py
+        namespaceFiles:
+          enabled: true
+        taskRunner:
+          type: io.kestra.plugin.scripts.runner.docker.Docker
+      - id: user-response
+        type: io.kestra.plugin.core.flow.Pause
+        description: user gets 5 minutes time to respond to the message
+        tasks:
+          - id: get-user-input
+            type: io.kestra.plugin.scripts.python.Commands
+            commands:
+              - python value.py
+            namespaceFiles:
+              enabled: true
+          - id: check-user-state
+            type: io.kestra.plugin.core.flow.If
+            condition: outputs.get-user-input.exitCode == 1
+            else:
+              - id: input-from-user
+                type: io.kestra.plugin.core.flow.If
+                condition: outputs.get-user-input.exitCode==0
+                then:
+                  - id: user-input-received
+                    type: io.kestra.plugin.core.log.Log
+                    message: User acknowledged the alert message
+            then:
+              - id: alert-emergency-contacts
+                type: io.kestra.plugin.scripts.python.Commands
+                commands:
+                  - pip install twilio
+                  - python main.py
+                namespaceFiles:
+                  enabled: true
+        delay: PT5M
+
+
